@@ -6,7 +6,9 @@ from beancount.parser import cmptest
 
 class DafMirrorPluginTest(cmptest.TestCase):
     @loader.load_doc()
-    def test_mirrors_transactions_for_matching_asset_prefix(self, entries, errors, options_map):
+    def test_mirrors_transactions_for_matching_asset_prefix(
+        self, entries, errors, options_map
+    ):
         """
         plugin "daf_mirror" "Assets:DAF:Brokerage-DAF"
 
@@ -45,7 +47,9 @@ class DafMirrorPluginTest(cmptest.TestCase):
         )
 
     @loader.load_doc()
-    def test_skips_transactions_with_other_asset_accounts(self, entries, errors, options_map):
+    def test_skips_transactions_with_other_asset_accounts(
+        self, entries, errors, options_map
+    ):
         """
         plugin "daf_mirror" "Assets:DAF:Brokerage-DAF"
 

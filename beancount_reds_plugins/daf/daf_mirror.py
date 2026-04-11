@@ -5,8 +5,7 @@ from __future__ import annotations
 from ast import literal_eval
 from typing import Optional
 
-from beancount.core import amount
-from beancount.core import data
+from beancount.core import amount, data
 
 __plugins__ = ("mirror_daf_transactions",)
 
@@ -63,7 +62,9 @@ def _should_mirror(entry, account_prefix: str) -> bool:
     return (
         isinstance(entry, data.Transaction)
         and not entry.meta.get(META_GENERATED)
-        and any(posting.account.startswith(account_prefix) for posting in entry.postings)
+        and any(
+            posting.account.startswith(account_prefix) for posting in entry.postings
+        )
         and not any(
             posting.account.startswith("Assets:")
             and not posting.account.startswith(account_prefix)
@@ -91,7 +92,9 @@ def _mirror_transaction(
     if not postings:
         return None
 
-    return entry._replace(meta=meta, payee=payee, narration=narration, postings=postings)
+    return entry._replace(
+        meta=meta, payee=payee, narration=narration, postings=postings
+    )
 
 
 def _mirror_posting(posting: data.Posting) -> data.Posting:
